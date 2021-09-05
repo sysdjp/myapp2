@@ -118,8 +118,7 @@ class _CreateAccoutPageState extends State<CreateAccoutPage> {
                       if (nameController.text.isNotEmpty &&
                           userIdController.text.isNotEmpty &&
                           emailController.text.isNotEmpty &&
-                          passController.text.isNotEmpty &&
-                          image != null) {
+                          passController.text.isNotEmpty) {
                         var result = await Authentication.signUp(
                             email: emailController.text,
                             pass: passController.text);

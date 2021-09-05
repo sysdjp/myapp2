@@ -1,6 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:myapp2/utils/authentication.dart';
 import 'package:myapp2/view/start_up/create_accout_page.dart';
+import 'package:myapp2/view/time_line/time_line_page.dart';
 
 import '../screen.dart';
 
@@ -70,9 +72,15 @@ class _LoginPageState extends State<LoginPage> {
                 height: 70,
               ),
               ElevatedButton(
-                onPressed: () {
-                  Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => Screen()));
+                onPressed: () async {
+                  var result = await Authentication.emailSignIn(
+                      email: emailController.text, pass: passController.text);
+                  if (result == true) {
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => TimeLinePage()));
+                  }
                 },
                 child: Text('emailでログイン'),
               ),
