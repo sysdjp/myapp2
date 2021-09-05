@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:myapp2/utils/authentication.dart';
 import 'package:myapp2/view/start_up/create_accout_page.dart';
 import 'package:myapp2/view/time_line/time_line_page.dart';
+import 'package:device_info/device_info.dart';
 
 import '../screen.dart';
 
@@ -76,6 +77,17 @@ class _LoginPageState extends State<LoginPage> {
                   var result = await Authentication.emailSignIn(
                       email: emailController.text, pass: passController.text);
                   if (result == true) {
+                    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+                    try {
+                      AndroidDeviceInfo androidInfo =
+                          await deviceInfo.androidInfo;
+                      print(
+                          'Running on ${androidInfo.androidId}'); // => Android デバイスID出力
+                    } catch (e) {
+                      IosDeviceInfo iosDeviceInfo = await deviceInfo.iosInfo;
+                      print(
+                          'Running on ${iosDeviceInfo.identifierForVendor}'); // => iOS UUID 出力
+                    }
                     Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
